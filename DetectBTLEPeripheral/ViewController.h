@@ -1,15 +1,12 @@
-//
-//  ViewController.h
-//  DetectBTLEPeripheral
-//
-//  Created by noga.highland on 2015/01/24.
-//  Copyright (c) 2015年 nogahighland. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<CBCentralManagerDelegate, CBPeripheralDelegate>
 
+//BL機器連携先として振る舞うマネージャ
+@property (strong, nonatomic) CBCentralManager      *centralManager;
+//発見した周辺機器への参照（deallocateされるのを防止するため）
+@property (strong, nonatomic) CBPeripheral          *discoveredPeripheral;
 
 @end
 

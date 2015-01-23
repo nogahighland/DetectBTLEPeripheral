@@ -14,6 +14,7 @@
 		CEF6EDE11A72C12A002BD05F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF6EDE01A72C12A002BD05F /* Images.xcassets */; };
 		CEF6EDE41A72C12A002BD05F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF6EDE21A72C12A002BD05F /* LaunchScreen.xib */; };
 		CEF6EDF01A72C12A002BD05F /* DetectBTLEPeripheralTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF6EDEF1A72C12A002BD05F /* DetectBTLEPeripheralTests.m */; };
+		CEF6EDFA1A72C1CA002BD05F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF6EDF91A72C1CA002BD05F /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		CEF6EDE91A72C12A002BD05F /* DetectBTLEPeripheralTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DetectBTLEPeripheralTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF6EDEE1A72C12A002BD05F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF6EDEF1A72C12A002BD05F /* DetectBTLEPeripheralTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetectBTLEPeripheralTests.m; sourceTree = "<group>"; };
+		CEF6EDF91A72C1CA002BD05F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF6EDFA1A72C1CA002BD05F /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +68,7 @@
 			children = (
 				CEF6EDD21A72C12A002BD05F /* DetectBTLEPeripheral */,
 				CEF6EDEC1A72C12A002BD05F /* DetectBTLEPeripheralTests */,
+				CEF6EDFB1A72C53B002BD05F /* Frameworks */,
 				CEF6EDD11A72C12A002BD05F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,6 +121,14 @@
 				CEF6EDEE1A72C12A002BD05F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEF6EDFB1A72C53B002BD05F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6EDF91A72C1CA002BD05F /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
