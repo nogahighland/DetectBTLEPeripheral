@@ -39,7 +39,7 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     //RSSIの値次第で接続に進むかどうかを決める。ここでは無視。
-    NSLog(@"周辺機器を発見:%@ 信号強度:%d", peripheral.name, (int) RSSI.integerValue);
+    NSLog(@"周辺機器を発見:%@ 信号強度:%d 情報:%@", peripheral.name, (int) RSSI.integerValue, advertisementData);
     //未発見機器の場合、接続を試みる。
     if (_discoveredPeripheral != peripheral) {
         _discoveredPeripheral = peripheral;
@@ -94,6 +94,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
         return;
     }
     for (CBCharacteristic *characteristic in service.characteristics) {
+        NSLog(@"キャラクタリスティックを発見 機器情報:%@ サービス:%@ キャラクタリスティック:%@", peripheral, service, characteristic);
         if (!CHARACTERISTIC_UUID || [characteristic.UUID isEqual:CHARACTERISTIC_UUID]) {
             //指定した通知のみを購読する。機器通知は接続時にperipheralに設定したdelegate=selfに通知される。
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
