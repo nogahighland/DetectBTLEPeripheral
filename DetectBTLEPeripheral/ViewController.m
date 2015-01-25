@@ -185,7 +185,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
             continue;
         }
         for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID isEqual:CHARACTERISTIC_UUID]) {
+            if (CHARACTERISTIC_UUID && [characteristic.UUID isEqual:CHARACTERISTIC_UUID]) {
                 if (characteristic.isNotifying) {
                     //購読中のキャラクタリスティックがあれば購読を停止する
                     [self.discoveredPeripheral setNotifyValue:NO forCharacteristic:characteristic];
