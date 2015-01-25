@@ -8,6 +8,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    _discoveredPeripherals = [NSMutableArray array];
 }
 
 # pragma mark - CBCentralManagerDelegate
@@ -40,12 +41,17 @@
                   RSSI:(NSNumber *)RSSI {
     //RSSIの値次第で接続に進むかどうかを決める。ここでは無視。
     NSLog(@"周辺機器を発見:%@ 信号強度:%d 情報:%@", peripheral.name, (int) RSSI.integerValue, advertisementData);
-    //未発見機器の場合、接続を試みる。
-    if (_discoveredPeripheral != peripheral) {
-        _discoveredPeripheral = peripheral;
-        NSLog(@"機器へ接続開始 機器:%@", peripheral);
-        [_centralManager connectPeripheral:peripheral options:nil];
+    
+    for (CBPeripheral *p in _discoveredPeripherals) {
+        if (p == peripheral) {
+            return;
+        }
     }
+    
+    //未発見機器の場合、接続を試みる。
+    [_discoveredPeripherals addObject:peripheral];
+    NSLog(@"機器へ接続開始 機器:%@", peripheral);
+    [_centralManager connectPeripheral:peripheral options:nil];
 }
 
 /**
