@@ -63,7 +63,6 @@
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     NSLog(@"接続完了 機器:%@", peripheral);
-    [_centralManager stopScan];
     peripheral.delegate = self;
     //指定したUUIDのサービスを持つ周辺機器を検出する(nilの場合は全ての周辺機器)
     [peripheral discoverServices:SERVICE_UUIDS];
