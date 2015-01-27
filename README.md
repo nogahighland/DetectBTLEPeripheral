@@ -103,6 +103,3 @@ didDiscoverCharacteristicsForService:(CBService *)service
 
 - ```<キャラクタリスティックUUID>```が```CHARACTERISTIC_UUIDS```にしている値となります。
 
-
-
-
