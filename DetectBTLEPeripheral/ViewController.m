@@ -1,7 +1,7 @@
 #import "ViewController.h"
 
-#define SERVICE_UUIDS           @[[CBUUID UUIDWithString:@"FFE0"]]
-#define CHARACTERISTIC_UUIDS    @[[CBUUID UUIDWithString:@"FFE1"]]
+#define SERVICE_UUIDS           nil // @[[CBUUID UUIDWithString:@"UUID"]]
+#define CHARACTERISTIC_UUIDS    nil // @[[CBUUID UUIDWithString:@"UUID"]]
 
 @implementation ViewController
 
