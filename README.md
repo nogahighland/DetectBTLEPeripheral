@@ -9,8 +9,8 @@
 
 - ViewController.mの下記を変更してください。
 ```objc
-#define SERVICE_UUIDS           nil //@[[CBUUID UUIDWithString:@"UUID"]]
-#define CHARACTERISTIC_UUID     nil //[CBUUID UUIDWithString:@"UUID"]
+#define SERVICE_UUIDS           nil // @[[CBUUID UUIDWithString:@"UUID"]]
+#define CHARACTERISTIC_UUIDS    nil // @[[CBUUID UUIDWithString:@"UUID"]]
 ```
 ### 変更方法
 
@@ -40,8 +40,18 @@
 	    }
 	}
 	```
+	- 具体的には、このようなログが出力されます。```<保持しているサービスUUID列>``` に該当するIDが、```SERVICE_UUIDS```に設定する値となります。
+	```
+	2015-01-27 11:08:54.162 DetectBTLEPeripheral[8388:60b] 周辺機器を発見:(null) 信号強度:-36 情報:{
+    kCBAdvDataChannel = 39;
+    kCBAdvDataIsConnectable = 1;
+    kCBAdvDataLocalName = "<宣伝名>";
+    kCBAdvDataServiceUUIDs =     (
+        <保持しているサービスUUID列>
+    );
+    ```
 
-- CHARACTERISTIC_UUID
+- CHARACTERISTIC_UUIDS
 	- 下記箇所や、信号受信のタイミングでキャラクタリスティック情報を出力しているので、名前や検出タイミングなどから自分の欲しい情報を取得してください。
 	- この情報を設定することで、指定した情報のみを受信するようになります。
 	```objc
@@ -54,20 +64,34 @@
 	 */
 	- (void)peripheral:(CBPeripheral *)peripheral
 	didDiscoverCharacteristicsForService:(CBService *)service
-	             error:(NSError *)error
-	{
+	             error:(NSError *)error {
 	    if (error) {
 	        NSLog(@"キャラクタリスティック検出中のエラー: %@", [error localizedDescription]);
-	        [self disconnectConnectedPeripheral];
+	        [self disconnectPeripheral:peripheral];
 	        return;
 	    }
 	    for (CBCharacteristic *characteristic in service.characteristics) {
-	        if (!CHARACTERISTIC_UUID || [characteristic.UUID isEqual:CHARACTERISTIC_UUID]) {
-		        NSLog(@"キャラクタリスティックを発見 機器情報:%@ サービス:%@ キャラクタリスティック:%@", peripheral, service, characteristic);
-	            //指定した通知のみを購読する。機器通知は接続時にperipheralに設定したdelegate=selfに通知される。
+	        NSLog(@"キャラクタリスティックを発見 機器情報:%@ サービス:%@ キャラクタリスティック:%@", peripheral, service, characteristic);
+	        if (!CHARACTERISTIC_UUIDS) {
+	            NSLog(@"購読を開始 機器情報:%@ サービス:%@ キャラクタリスティック:%@", peripheral, service, characteristic);
 	            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
 	        }
+	        [(NSArray*) CHARACTERISTIC_UUIDS enumerateObjectsUsingBlock:^(id characteristicUUID, NSUInteger idx, BOOL *stop) {
+	            if ([characteristic.UUID isEqual:characteristicUUID]) {
+	                //指定した通知のみを購読する。機器通知は接続時にperipheralに設定したdelegate=selfに通知される。
+	                NSLog(@"購読を開始 機器情報:%@ サービス:%@ キャラクタリスティック:%@", peripheral, service, characteristic);
+	                [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+	            }
+	        }];
 	    }
 	}
 	```
+	- 具体的には、このようなログが出力されます。```<保持しているサービスUUID列>``` に該当するIDが、```SERVICE_UUIDS```に設定する値となります。
+	```
+	2015-01-27 11:44:07.150 DetectBTLEPeripheral[8502:60b] キャラクタリスティックを発見 機器情報:<CBPeripheral: 0x1780ae220 identifier = <機器のID>, Name = "(null)", state = connected> サービス:<CBService: 0x1782643c0 Peripheral = <CBPeripheral: 0x1780ae220 identifier = <機器のID>, Name = "(null)", state = connected>, Primary = YES, UUID = <サービスUUID>> キャラクタリスティック:<CBCharacteristic: 0x1780977f0 UUID = <キャラクタリスティックUUID>, Value = (null), Properties = 0x10, Notifying = NO, Broadcasting = NO>
+	```
+	- ```<キャラクタリスティックUUID>```がCHARACTERISTIC_UUIDSにしているる値となります。
+
+
+
 
