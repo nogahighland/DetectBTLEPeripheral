@@ -1,8 +1,8 @@
-# DetectBTLEPeripheral(α)
+# DetectBTLEPeripheral
 
-- **開発中です。申し訳ありません。**
 - Bluetooth LE機器の信号スキャンサンプルです。
 - [Appleのサンプル](https://developer.apple.com/library/ios/samplecode/BTLE_Transfer/Introduction/Intro.html)を極力シンプルにして、コメントを日本語化しました。
+- **残念ながら、画面には何も出力されません。**
 - コンソールを見て周囲のBT端末との接続状況や受信した信号を楽しんでください。
 
 ## 受信する信号を限定したい場合
