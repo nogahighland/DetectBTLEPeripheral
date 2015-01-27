@@ -14,7 +14,7 @@
 ```
 ### 変更方法
 
-- SERVICE_UUIDS
+#### SERVICE_UUIDS
 	- 下記箇所で ```advertisementData``` に含まれるサービスを指定することで、そのサービスを備えた周辺機器のみを受け付けるようになります。
 	```objc
 	/**
@@ -51,7 +51,7 @@
     );
     ```
 
-- CHARACTERISTIC_UUIDS
+#### CHARACTERISTIC_UUIDS
 	- 下記箇所や、信号受信のタイミングでキャラクタリスティック情報を出力しているので、名前や検出タイミングなどから自分の欲しい情報を取得してください。
 	- この情報を設定することで、指定した情報のみを受信するようになります。
 	```objc
@@ -90,7 +90,7 @@
 	```
 	2015-01-27 11:44:07.150 DetectBTLEPeripheral[8502:60b] キャラクタリスティックを発見 機器情報:<CBPeripheral: 0x1780ae220 identifier = <機器のID>, Name = "(null)", state = connected> サービス:<CBService: 0x1782643c0 Peripheral = <CBPeripheral: 0x1780ae220 identifier = <機器のID>, Name = "(null)", state = connected>, Primary = YES, UUID = <サービスUUID>> キャラクタリスティック:<CBCharacteristic: 0x1780977f0 UUID = <キャラクタリスティックUUID>, Value = (null), Properties = 0x10, Notifying = NO, Broadcasting = NO>
 	```
-	- ```<キャラクタリスティックUUID>```がCHARACTERISTIC_UUIDSにしているる値となります。
+	- ```<キャラクタリスティックUUID>```が```CHARACTERISTIC_UUIDS```にしている値となります。
 
 
 
